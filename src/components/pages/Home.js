@@ -48,6 +48,8 @@ const Home = () => {
     category: [],
   });
 
+  console.log("category top new s: ", CategoryTopNews);
+
   const marqueeRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -563,7 +565,6 @@ const Home = () => {
                                   .replace(/-+/g, "-")
                                   .toLowerCase()}/${webDashBoardResult.id}`}
                               >
-                                
                                 {webDashBoardResult?.title} &nbsp; | &nbsp;
                               </Link>
                             ))}
@@ -1489,7 +1490,7 @@ const Home = () => {
                 <div className="row">
                   <div className="col-md-12 col-lg-12">
                     <div className="d-flex justify-content-between pb-2 p-0 w-100">
-                      <div className="topstories_title px-4 py-2 bg-primary text-white">
+                      <div className="topstories_title px-4 py-2 bg-primary text-white ">
                         Trending News{" "}
                       </div>
                     </div>
@@ -1942,7 +1943,6 @@ const Home = () => {
                                 ?.slice(0, 1)
                                 .map((GetPostsIndexResult, index) => (
                                   <div key={index}>
-                                    
                                     <Link
                                       // to={`/${encodeURIComponent(
                                       //   GetPostsIndexResult?.title
