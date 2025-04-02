@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import { API_BASE_URL } from "../../config/Config";
 import axios from "axios";
-import moment from "moment";
+import moment, { min } from "moment";
 import "moment/locale/hi";
 import { FaBars } from "react-icons/fa";
 import ReactHtmlParser from "react-html-parser";
@@ -34,6 +34,8 @@ const NewsDetails = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang")
   );
+  const [shortDetails, setShortDetails] = useState("");
+
   const { id } = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -135,6 +137,46 @@ const NewsDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const author_name = NewsDetails?.data?.author_name;
+    const formatted_author_name = author_name
+      ? author_name.charAt(0).toUpperCase() + author_name.slice(1).toLowerCase()
+      : "";
+    const state = NewsDetails?.data?.state;
+
+    const updated_at = NewsDetails?.data?.updated_at;
+
+    const formatted_updated_at = new Date(updated_at);
+    const year = formatted_updated_at.getFullYear();
+    const month = formatted_updated_at.getMonth();
+    const date = formatted_updated_at.getDate();
+    let hour = formatted_updated_at.getHours();
+    const minute = formatted_updated_at.getMinutes();
+
+    const timePeriod = hour >= 12 ? "PM" : "AM";
+
+    hour = hour > 12 ? hour - 12 : hour;
+
+    const date_in_good_form = `Last updated: ${date}-${months[month]}-${year}, ${hour}:${minute} ${timePeriod}`;
+    const all_details_in_format = `${state} | ${formatted_author_name} | ${date_in_good_form}`;
+
+    setShortDetails(all_details_in_format);
+    console.log("data : ", all_details_in_format);
+  }, [NewsDetails]);
   return (
     <div>
       <div className={`main-wrap ${isCanvasOpen ? "canvas-opened" : ""}`}>
@@ -392,6 +434,7 @@ const NewsDetails = () => {
                       <h4 className="post-title 1hbase mb-20">
                         {NewsDetails?.data?.title}
                       </h4>
+                      <p>{shortDetails}</p>
                     </div>
                     <div className="news_post_view">
                       {NewsDetails?.data ? (
