@@ -553,8 +553,6 @@ const NewsDetails = () => {
                   <div className="row">
                     {currentPosts?.map((RelatedPostResult, index) => (
                       <article className="col-lg-3" key={index}>
-                        {console.log(" 562 : ", RelatedPostResult)}
-
                         <div className="background-white mb-20">
                           <div className="post-thumb mb-15 img-hover-scale">
                             <Link
@@ -562,10 +560,10 @@ const NewsDetails = () => {
                               //   RelatedPostResult?.title
                               // )}/${RelatedPostResult?.id}`}
 
-                              to={`/${RelatedPostResult.get_category.title.toLowerCase()}/${RelatedPostResult.title
-                                .replace(/[^a-zA-Z]/g, "-")
-                                .replace(/-+/g, "-")
-                                .toLowerCase()}/${RelatedPostResult.id}`}
+                              to={`/${RelatedPostResult.get_category.title.toLowerCase()}/${RelatedPostResult?.title
+                                ?.replace(/[^a-zA-Z]/g, "-")
+                                ?.replace(/-+/g, "-")
+                                ?.toLowerCase()}/${RelatedPostResult.id}`}
                             >
                               {RelatedPostResult?.file_type == "image" ? (
                                 <div className="color-white">
@@ -596,10 +594,10 @@ const NewsDetails = () => {
                               //   RelatedPostResult?.title
                               // )}/${RelatedPostResult?.id}`}
 
-                              to={`/${RelatedPostResult.get_category.title.toLowerCase()}/${RelatedPostResult.title
-                                .replace(/[^a-zA-Z]/g, "-")
-                                .replace(/-+/g, "-")
-                                .toLowerCase()}/${RelatedPostResult.id}`}
+                              to={`/${RelatedPostResult.get_category.title.toLowerCase()}/${RelatedPostResult?.title
+                                ?.replace(/[^a-zA-Z]/g, "-")
+                                ?.replace(/-+/g, "-")
+                                ?.toLowerCase()}/${RelatedPostResult.id}`}
                             >
                               <h6 className="post-title textline mb-15">
                                 {RelatedPostResult?.title}

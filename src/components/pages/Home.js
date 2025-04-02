@@ -48,8 +48,6 @@ const Home = () => {
     category: [],
   });
 
-  console.log("category top new s: ", CategoryTopNews);
-
   const marqueeRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -99,7 +97,6 @@ const Home = () => {
       setIsLoading(false);
     }
   };
-  console.log("webDashBoarddfmng", webDashBoard);
 
   //  Top News Categroy Wise
   const GetTopCategoryNews = async (id) => {
@@ -541,7 +538,7 @@ const Home = () => {
                 <div className="category_title mt-md-3 py-1">
                   <div className="d-lg-flex justify-content-between border-bottom border-danger p-0">
                     <div className="d-flex align-items-center">
-                      <div className="topstories_title px-4 py-2 bg-danger text-white">
+                      <div className="topstories_title px-4 py-2 bg-danger text-white main_top_story">
                         Top Stories{" "}
                       </div>
                       <div className="marquee-container">

@@ -3060,7 +3060,9 @@ pre {
   width: 100%;
   border-radius: 10px;
 }
-
+.main_top_story{
+   width: max-content;
+}
 .position_bottom {
   position: absolute;
   bottom: 0;
