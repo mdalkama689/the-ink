@@ -1,0 +1,24 @@
+  // useEffect(() => {
+  //   const GetNewsDetails = async () => {
+  //     let ApiData = {
+  //       language: localStorage.getItem("lang")
+  //         ? localStorage.getItem("lang")
+  //         : "En",
+  //     };
+  //     axios
+  //       .get(
+  //         `${API_BASE_URL}/web-post-detail?id=${locationData.name}&language=${ApiData.language}`
+  //       )
+  //       .then((response) => {
+  //         setNewsDetails(response.data);
+  //         setVideoPath(response.data.data.vedio_file);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
+  //   GetNewsDetails();
+  //   GetCategorieList();
+  // }, [locationData.name]);
+  // console.log(NewsDetails);
+  // console.log(videoPath);
