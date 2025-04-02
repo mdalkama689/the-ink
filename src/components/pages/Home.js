@@ -50,6 +50,8 @@ const Home = () => {
 
   const marqueeRef = useRef(null);
 
+  const deviceType = useDeviceType();
+
   const handleMouseEnter = () => {
     marqueeRef.current.style.animationPlayState = "paused";
   };
@@ -348,7 +350,13 @@ const Home = () => {
         {/* <!-- Main Header --> */}
         {/* <Header /> */}
         <div className="main-wrap">
-          <div id="top-head" class="header-top-bar align-items-center">
+          <div
+            id="top-head"
+            class="header-top-bar align-items-center"
+            style={{
+              height: "70px",
+            }}
+          >
             <div class="container">
               <div class="row align-items-center">
                 <div class="col-7 col-md-8">
@@ -382,6 +390,15 @@ const Home = () => {
                     </ul>
                   </ul>
                 </div>
+
+                {deviceType == "big" && (
+                  <Link to="/" className="m-0 big-device-new-logo">
+                    <Navbar.Brand>
+                      <img src={newsLogo} alt="" />{" "}
+                    </Navbar.Brand>
+                  </Link>
+                )}
+
                 <div className="col-5 col-md-4">
                   <div className="d-flex align-items-center justify-content-end">
                     <div className="select_language">
@@ -426,11 +443,13 @@ const Home = () => {
           ) : (
             <Navbar expand="lg" className="nav_custome">
               <Container>
-                <Link to="/" className="m-0">
-                  <Navbar.Brand>
-                    <img src={newsLogo} alt="" />{" "}
-                  </Navbar.Brand>
-                </Link>
+                {deviceType == "small" && (
+                  <Link to="/" className="m-0">
+                    <Navbar.Brand>
+                      <img src={newsLogo} alt="" />{" "}
+                    </Navbar.Brand>
+                  </Link>
+                )}
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse
                   id="navbarScroll"
@@ -2421,3 +2440,20 @@ const Home = () => {
   );
 };
 export default Home;
+
+const useDeviceType = () => {
+  const [device, setDevice] = useState(
+    window.innerWidth >= 992 ? "big" : "small"
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDevice(window.innerWidth >= 999 ? "big" : "small");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return device;
+};

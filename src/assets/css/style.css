@@ -3244,6 +3244,13 @@ pre {
   /* border-radius: 50px; */
 }
 
+
+ .big-device-new-logo{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+ }
 .select_language .DropdownMenu {
   padding: 6px 12px;
   font-size: 18px;
