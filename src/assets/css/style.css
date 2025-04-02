@@ -3217,6 +3217,12 @@ pre {
   width: fit-content;
   margin-bottom: 15px;
 }
+.footer-quick-links{
+
+  margin-top: 80px;
+  color: blue;
+  font-weight: bold;
+}
 
 .textline {
   overflow: hidden;

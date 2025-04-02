@@ -175,7 +175,6 @@ const NewsDetails = () => {
     const all_details_in_format = `${state} | ${formatted_author_name} | ${date_in_good_form}`;
 
     setShortDetails(all_details_in_format);
-    console.log("data : ", all_details_in_format);
   }, [NewsDetails]);
   return (
     <div>
@@ -293,7 +292,7 @@ const NewsDetails = () => {
                   <img src={newsLogo} alt="" />{" "}
                 </Navbar.Brand>
               </Link>
-              <Navbar.Toggle aria-controls="navbarScroll" />
+              {/* <Navbar.Toggle aria-controls="navbarScroll" />
               <Navbar.Collapse
                 id="navbarScroll"
                 className="justify-content-between m-0 ml-30"
@@ -309,11 +308,13 @@ const NewsDetails = () => {
                           aria-controls="pills-home"
                           aria-selected="true"
                         >
+                        
                           {CategorieListResult?.title}
                         </Link>
                       </>
                     );
                   })}
+             
                 </Nav>
                 {/* <Nav className="d-none d-md-none d-lg-block">
                     <form
@@ -335,7 +336,8 @@ const NewsDetails = () => {
                       </div>
                     </form>
                   </Nav> */}
-              </Navbar.Collapse>
+              {/* </Navbar.Collapse> */} 
+              <Category CategorieList={CategorieList} />
             </Container>
 
             <div className="mobile_viewsearch d-block d-md-none d-lg-none">
@@ -676,7 +678,7 @@ const NewsDetails = () => {
         )}
 
         {/* <!-- Footer Start--> */}
-        <Footer />
+        <Footer CategorieList={CategorieList} />
       </div>
       {/* <!-- Main Wrap End--> */}
       <div className="dark-mark"></div>
@@ -692,3 +694,56 @@ const NewsDetails = () => {
 };
 
 export default NewsDetails;
+
+
+ function Category({CategorieList}){
+  return (
+ <>
+   <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse
+                id="navbarScroll"
+                className="justify-content-between m-0 ml-30"
+              >
+                <Nav className="me-auto">
+                  {CategorieList?.map((CategorieListResult) => {
+                    return (
+                      <>
+                        <Link
+                          to="/"
+                          role="tab"
+                          // onClick={() => GetWebDashBoardCategory(CategorieListResult?.id)}
+                          aria-controls="pills-home"
+                          aria-selected="true"
+                        >
+                        
+                          {CategorieListResult?.title}
+                        </Link>
+                      </>
+                    );
+                  })}
+             
+                </Nav>
+                {/* <Nav className="d-none d-md-none d-lg-block">
+                    <form
+                      action="#"
+                      method="get"
+                      className="search-form d-lg-inline float-right
+               position-relative m-xs-0 mr-30"
+                      onChange={(e) => GetSearchData(e.target.value)}
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        GetSearchData(searchKey);
+                      }}
+                    >
+                      <div class="buscar-caja">
+                        <input type="text" name="" value={searchKey} onChange={(e) =>
+                          setSearchKey(e.target.value)} class="buscar-txt" placeholder="Search ....." />
+                        <a class="buscar-btn"> <i class="fa fa-search" onClick={(e) =>
+                          GetSearchData(e.target.value)}></i> </a>
+                      </div>
+                    </form>
+                  </Nav> */}
+              </Navbar.Collapse>
+ </>
+  )
+}
