@@ -26,6 +26,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { FaPinterest } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
+import useDeviceType from "../../hooks/useDeviceType";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -112,6 +113,7 @@ const Home = () => {
       const response = await axios.get(
         `${API_BASE_URL}/category-topnews?category_id=${activeCategoryId}&language=${ApiData.language}`
       );
+   
       setCategoryTopNews(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -2441,19 +2443,3 @@ const Home = () => {
 };
 export default Home;
 
-const useDeviceType = () => {
-  const [device, setDevice] = useState(
-    window.innerWidth >= 992 ? "big" : "small"
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setDevice(window.innerWidth >= 999 ? "big" : "small");
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return device;
-};
