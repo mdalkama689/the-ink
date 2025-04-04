@@ -1,11 +1,11 @@
 const CopyRight = () => {
   return (
-    <div class="footer-bottom-area text-muted">
-      <div class="container">
-        <div class="footer-border pt-20 pb-20">
-          <div class="row d-flex align-items-center justify-content-between">
-            <div class="col-12">
-              <div class="footer-copy-right">
+    <div className="footer-bottom-area text-muted">
+      <div className="container">
+        <div className="footer-border pt-20 pb-20">
+          <div className="row d-flex align-items-center justify-content-between">
+            <div className="col-12">
+              <div className="footer-copy-right">
                 <p
                   style={{
                     color: "black",

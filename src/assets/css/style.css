@@ -3716,3 +3716,15 @@ a.description_title h2 strong {
 .footer-links-list {
   margin-left: 15vw;
 }
+
+.category-link-div {
+  transition: color 0.3s ease-in-out;
+}
+
+.category-link-div:hover {
+  color: #f04646;
+  cursor: pointer;
+}
+.category-selected-active{
+  color: #f04646;
+}

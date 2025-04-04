@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import newsLogo from "../../assets/images/NewsLogo2.png";
 import { Navbar } from "react-bootstrap";
@@ -10,20 +10,29 @@ import Category from "./Category";
 import SocialLinks from "./SocialLinks";
 import CopyRight from "./CopyRight";
 
-const Footer = ({setSearchKey}) => {
+const Footer = ({ activeCategoryId, setActiveCategoryId, categorieList }) => {
   const deviceType = useDeviceType();
+
   return (
     <div className="footer">
       <CompanyLogo />
 
       {deviceType == "big" ? (
         <div className="footer-content">
-          <Category setSearchKey={setSearchKey} />
+          <Category
+            categorieList={categorieList}
+            activeCategoryId={activeCategoryId}
+            setActiveCategoryId={setActiveCategoryId}
+          />
           <FooterLinks />
         </div>
       ) : (
         <>
-          <CategoryForMobile />
+          <CategoryForMobile
+            categorieList={categorieList}
+            activeCategoryId={activeCategoryId}
+            setActiveCategoryId={setActiveCategoryId}
+          />
           <FooterLinksForMobile />
         </>
       )}

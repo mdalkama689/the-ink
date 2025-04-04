@@ -42,22 +42,22 @@ const Header = () => {
 
   return (
     <div className="main-wrap">
-      <div id="top-head" class="header-top-bar align-items-center p-9">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
+      <div id="top-head" className="header-top-bar align-items-center p-9">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8">
               {/* <ul class="con-info-list m-0">
                 <li><i class="ti-calendar" aria-hidden="true"></i><span id="current_date">December 6, 2023</span></li>
                 <li><i class="ti-alarm-clock" aria-hidden="true"></i>Last Update November 30, 2018 11:07 am</li>
                 <li><i class="ti-location-arrow" aria-hidden="true"></i>Australia</li></ul> */}
             </div>
-            <div class="col-md-4 text-right">
-              <ul class="top-head-social m-0">
-                <li><a  href="https://www.facebook.com/" ><i class="ti-facebook"></i></a></li>
-                <li><a  href="https://www.twitter.com/"><i class="ti-twitter-alt"></i></a></li>
-                <li><a  href="https://www.linkedin.com/in/"><i class="ti-linkedin"></i></a></li>
-                <li><a  href="https://www.pinterest.com/"><i class="ti-pinterest-alt"></i></a></li>
-                <li><a  href="https://www.instagram.com/"><i class="ti-instagram"></i></a></li>
+            <div className="col-md-4 text-right">
+              <ul className="top-head-social m-0">
+                <li><a  href="https://www.facebook.com/" ><i className="ti-facebook"></i></a></li>
+                <li><a  href="https://www.twitter.com/"><i className="ti-twitter-alt"></i></a></li>
+                <li><a  href="https://www.linkedin.com/in/"><i className="ti-linkedin"></i></a></li>
+                <li><a  href="https://www.pinterest.com/"><i className="ti-pinterest-alt"></i></a></li>
+                <li><a  href="https://www.instagram.com/"><i className="ti-instagram"></i></a></li>
               </ul>
             </div>
           </div>

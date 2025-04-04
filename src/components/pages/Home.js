@@ -36,7 +36,7 @@ const Home = () => {
   );
   const [CategorieList, setCategorieList] = useState([]);
   const [CategoryTopNews, setCategoryTopNews] = useState([]);
-  console.log("CategoryTopNews1231321", CategoryTopNews);
+  // console.log("CategoryTopNews1231321", CategoryTopNews);
   const [CategoryTopNewsImages, setCategoryTopNewsImages] = useState(
     CategoryTopNews.length && CategoryTopNews
   );
@@ -110,10 +110,13 @@ const Home = () => {
           ? localStorage.getItem("lang")
           : "En",
       };
+    
+
       const response = await axios.get(
         `${API_BASE_URL}/category-topnews?category_id=${activeCategoryId}&language=${ApiData.language}`
       );
 
+      console.log('response : ', response.data)
       setCategoryTopNews(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -202,6 +205,7 @@ const Home = () => {
       // Fetch data for the initial active category
       GetTopCategoryNews(initialCategoryId);
     }
+  
   }, [CategorieList]);
   useEffect(() => {
     // Fetch data for the active category when the language changes
@@ -338,7 +342,7 @@ const Home = () => {
     if (!value) return;
     let title = "";
 
-    if (selectedLanguage.toLowerCase() === "hi") {
+    if (selectedLanguage && selectedLanguage.toLowerCase() === "hi") {
       title = value.title
         ?.replace(/[^\w\s\u0900-\u097F]/g, "-")
         ?.replace(/\s+/g, "-")
@@ -361,6 +365,8 @@ const Home = () => {
 
     return `/${category}/${title}/${id}`;
   };
+
+
 
   return (
     <div>
@@ -2341,7 +2347,11 @@ const Home = () => {
         )}
 
         {/* <!-- Footer Start--> */}
-        <Footer setSearchKey={setSearchKey} />
+        <Footer  
+        activeCategoryId={activeCategoryId}
+       setActiveCategoryId={setActiveCategoryId}
+      categorieList={CategorieList}
+        />
       </div>
       {/* <!-- Main Wrap End--> */}
       <div className="dark-mark"></div>
