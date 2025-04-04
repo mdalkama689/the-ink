@@ -9,13 +9,13 @@ import Footer from "../Footer/Footer";
 import { API_BASE_URL } from "../../config/Config";
 import axios from "axios";
 import moment from "moment";
-import 'moment/locale/hi';
+import "moment/locale/hi";
 import { FaBars } from "react-icons/fa";
 import ReactHtmlParser from "react-html-parser";
 import Dropdown from "react-bootstrap/Dropdown";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import newsLogo from "../../assets/images/NewsLogo2.png";
 import { FaFacebook } from "react-icons/fa";
 import { LuInstagram } from "react-icons/lu";
@@ -40,7 +40,9 @@ const ReletedPostDetails = () => {
           : "En",
       };
       axios
-        .get(`${API_BASE_URL}/web-post-detail?id=${id}&language=${ApiData.language}`)
+        .get(
+          `${API_BASE_URL}/web-post-detail?id=${id}&language=${ApiData.language}`
+        )
         .then((response) => {
           setReletedPostDetails(response.data);
           setVideoPath(response.data.data.vedio_file);
@@ -52,7 +54,7 @@ const ReletedPostDetails = () => {
     GetReletedPostDetails();
     // GetCategorieList();
   }, [id]);
-  console.log("ReletedPostDetails", ReletedPostDetails)
+  console.log("ReletedPostDetails", ReletedPostDetails);
 
   const [isCanvasOpen, setIsCanvasOpen] = useState(false);
   const toggleCanvas = () => {
@@ -77,9 +79,8 @@ const ReletedPostDetails = () => {
   };
   useEffect(() => {
     GetCategorieList();
-  }, [])
+  }, []);
 
-  
   return (
     <div>
       <div className={`main-wrap ${isCanvasOpen ? "canvas-opened" : ""}`}>
@@ -100,8 +101,7 @@ const ReletedPostDetails = () => {
                     <strong>Categories</strong>
                   </h5>
                 </div>
-                <div className="menu-container" onClick={closeCanvas}>
-                </div>
+                <div className="menu-container" onClick={closeCanvas}></div>
               </div>
             </div>
             <div className="ps__rail-x">
@@ -118,19 +118,36 @@ const ReletedPostDetails = () => {
             <div class="container">
               <div class="row align-items-center">
                 <div class="col-7 col-md-8">
-
                   <ul className="top-head-social m-0 d-flex">
-                    <a href="https://www.facebook.com/"><li><FaFacebook /></li></a>
-                    <a href="https://www.instagram.com/"><li><LuInstagram /></li></a>
-                    <a href="https://www.twitter.com/"><li><FaTwitter /></li></a>
-                    <a href="https://www.pinterest.com/"><li><FaPinterest /></li></a>
-                    <a href="https://www.linkedin.com/in/"><li><FaLinkedinIn /></li></a>
+                    <a href="https://www.facebook.com/">
+                      <li>
+                        <FaFacebook />
+                      </li>
+                    </a>
+                    <a href="https://www.instagram.com/">
+                      <li>
+                        <LuInstagram />
+                      </li>
+                    </a>
+                    <a href="https://www.twitter.com/">
+                      <li>
+                        <FaTwitter />
+                      </li>
+                    </a>
+                    <a href="https://www.pinterest.com/">
+                      <li>
+                        <FaPinterest />
+                      </li>
+                    </a>
+                    <a href="https://www.linkedin.com/in/">
+                      <li>
+                        <FaLinkedinIn />
+                      </li>
+                    </a>
                   </ul>
-
                 </div>
                 <div className="col-5 col-md-4">
                   <div className="d-flex align-items-center justify-content-end">
-
                     <div className="select_language">
                       <Dropdown
                         onSelect={handleLanguageDropdown}
@@ -143,12 +160,9 @@ const ReletedPostDetails = () => {
                         >
                           {selectedLanguage ? (
                             selectedLanguage == "Hi" ? (
-                              <span>
-                                Hindi </span>
+                              <span>Hindi </span>
                             ) : (
-                              <span>
-                                English </span>
-
+                              <span>English </span>
                             )
                           ) : (
                             <span>English</span>
@@ -157,12 +171,10 @@ const ReletedPostDetails = () => {
 
                         <Dropdown.Menu className="select_language DropdownMenu">
                           <Dropdown.Item eventKey="Hi">
-                            <span>
-                              Hindi </span>
+                            <span>Hindi </span>
                           </Dropdown.Item>
                           <Dropdown.Item eventKey="En">
-                            <span>
-                              English </span>
+                            <span>English </span>
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
@@ -173,31 +185,38 @@ const ReletedPostDetails = () => {
             </div>
           </div>
 
-
-          <Navbar expand="lg" bg="white" data-bs-theme="white" className="nav_custome">
+          <Navbar
+            expand="lg"
+            bg="white"
+            data-bs-theme="white"
+            className="nav_custome"
+          >
             <Container>
               <Link to="/" className="m-0">
-                <Navbar.Brand><img src={newsLogo} alt="" /> </Navbar.Brand>
+                <Navbar.Brand>
+                  <img src={newsLogo} alt="" />{" "}
+                </Navbar.Brand>
               </Link>
               <Navbar.Toggle aria-controls="navbarScroll" />
-              <Navbar.Collapse id="navbarScroll" className="justify-content-between m-0 ml-30">
+              <Navbar.Collapse
+                id="navbarScroll"
+                className="justify-content-between m-0 ml-30"
+              >
                 <Nav className="me-auto">
-                  {
-                    CategorieList?.map((CategorieListResult) => {
-                      return (
-                        <>
-                          <Link
-                            to='/'
-                            role="tab"
-                            aria-controls="pills-home"
-                            aria-selected="true"
-                          >
-                            {CategorieListResult?.title}
-                          </Link>
-                        </>
-                      )
-                    })
-                  }
+                  {CategorieList?.map((CategorieListResult) => {
+                    return (
+                      <>
+                        <Link
+                          to="/"
+                          role="tab"
+                          aria-controls="pills-home"
+                          aria-selected="true"
+                        >
+                          {CategorieListResult?.title}
+                        </Link>
+                      </>
+                    );
+                  })}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -205,8 +224,7 @@ const ReletedPostDetails = () => {
             <div className="mobile_viewsearch d-block d-md-none d-lg-none">
               <div className="container">
                 <div className="row">
-                  <div className="col-12 p-0">
-                  </div>
+                  <div className="col-12 p-0"></div>
                 </div>
               </div>
             </div>
@@ -215,7 +233,9 @@ const ReletedPostDetails = () => {
         {/* off-canvas-toggle-cover */}
         <div className="off-canvas-toggle-cover">
           <div
-            className="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
+            className="off-canvas-toggle hidden d-inline-block ml-15"
+            id="off-canvas-toggle"
+          >
             <FaBars
               name="grid-outline"
               onClick={toggleCanvas}
@@ -229,39 +249,46 @@ const ReletedPostDetails = () => {
 
         <main className="position-relative">
           <div className="container">
-
             <div className="row mb-50 pt-100">
               <div className="col-lg-8 col-md-12 ">
                 <div class="entry-bottom mb-20">
                   <div class="overflow-hidden">
-
                     <div class="tags text-muted font-small pt-1 my-auto">
-                     
                       <span class="update-on mx-3">
-                        {
-                          ReletedPostDetails?.data?.language === "Hi" ? (
-                            moment().diff(moment(ReletedPostDetails?.data?.created_at), 'hours') < 24
-                              ? moment(ReletedPostDetails?.data?.created_at).locale('hi').fromNow()
-                              : moment(ReletedPostDetails?.data?.created_at)
-                                .locale('hi')
+                        {ReletedPostDetails?.data?.language === "Hi"
+                          ? moment().diff(
+                              moment(ReletedPostDetails?.data?.created_at),
+                              "hours"
+                            ) < 24
+                            ? moment(ReletedPostDetails?.data?.created_at)
+                                .locale("hi")
+                                .fromNow()
+                            : moment(ReletedPostDetails?.data?.created_at)
+                                .locale("hi")
                                 .format("DD MMMM YYYY")
                                 .replace(/[०१२३४५६७८९]/g, function (match) {
-                                  return "0123456789"["०१२३४५६७८९".indexOf(match)];
+                                  return "0123456789"[
+                                    "०१२३४५६७८९".indexOf(match)
+                                  ];
                                 })
-                          ) : (
-                            moment().diff(moment(ReletedPostDetails?.data?.created_at), 'hours') < 24
-                              ? moment(ReletedPostDetails?.data?.created_at).locale('en').fromNow()
-                              : moment(ReletedPostDetails?.data?.created_at).locale('en').format("DD MMMM YYYY")
-                          )
-                        }
+                          : moment().diff(
+                              moment(ReletedPostDetails?.data?.created_at),
+                              "hours"
+                            ) < 24
+                          ? moment(ReletedPostDetails?.data?.created_at)
+                              .locale("en")
+                              .fromNow()
+                          : moment(ReletedPostDetails?.data?.created_at)
+                              .locale("en")
+                              .format("DD MMMM YYYY")}
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="entry-header entry-header-1">
-
-                  <h4 className="post-title 1hbase mb-20">{ReletedPostDetails?.data?.title}</h4>
-
+                  <h4 className="post-title 1hbase mb-20">
+                    {ReletedPostDetails?.data?.title}
+                  </h4>
                 </div>
                 <div className="news_post_view">
                   {ReletedPostDetails?.data ? (
@@ -278,11 +305,18 @@ const ReletedPostDetails = () => {
                         <source src={videoPath} type="video/mp4" />
                       </video>
                     ) : (
-                      <img src={ReletedPostDetails?.data?.get_images[0]?.image} alt="post-slider" />
+                      <img
+                        src={ReletedPostDetails?.data?.get_images[0]?.image}
+                        alt="post-slider"
+                      />
                     )
                   ) : (
                     <figure className="single-thumnail mb-30">
-                      <img src={ReletedPostDetails?.data?.thumbnel} alt="" style={{ width: "100%" }} />
+                      <img
+                        src={ReletedPostDetails?.data?.thumbnel}
+                        alt=""
+                        style={{ width: "100%" }}
+                      />
                       <div className="credit mt-15 font-small color-grey">
                         <i className="ti-credit-card mr-5"></i>
                       </div>
@@ -291,11 +325,31 @@ const ReletedPostDetails = () => {
                 </div>
                 <div className="single-excerpt">
                   <ul className="d-flex">
-                    <a href="https://www.facebook.com/"><li><FaFacebook /></li></a>
-                    <a href="https://www.instagram.com/"><li><LuInstagram /></li></a>
-                    <a href="https://www.twitter.com/"><li><FaTwitter /></li></a>
-                    <a href="https://www.pinterest.com/"><li><FaPinterest /></li></a>
-                    <a href="https://www.linkedin.com/in/"><li><FaLinkedinIn /></li></a>
+                    <a href="https://www.facebook.com/">
+                      <li>
+                        <FaFacebook />
+                      </li>
+                    </a>
+                    <a href="https://www.instagram.com/">
+                      <li>
+                        <LuInstagram />
+                      </li>
+                    </a>
+                    <a href="https://www.twitter.com/">
+                      <li>
+                        <FaTwitter />
+                      </li>
+                    </a>
+                    <a href="https://www.pinterest.com/">
+                      <li>
+                        <FaPinterest />
+                      </li>
+                    </a>
+                    <a href="https://www.linkedin.com/in/">
+                      <li>
+                        <FaLinkedinIn />
+                      </li>
+                    </a>
                   </ul>
                 </div>
                 <div className="entry-main-content">
@@ -304,7 +358,6 @@ const ReletedPostDetails = () => {
                 </div>
 
                 {/* <!--related posts--> */}
-
               </div>
               {/* <!--End col-lg-8--> */}
               <div className="col-lg-4 col-md-12 sidebar-right">
@@ -328,7 +381,6 @@ const ReletedPostDetails = () => {
                                 >
                                   <img
                                     src={Commentresult?.get_user?.profile}
-                                  
                                     alt=""
                                   />
                                 </Link>
@@ -337,7 +389,7 @@ const ReletedPostDetails = () => {
                                 <p className="font-medium mb-10">
                                   {Commentresult?.comment}
                                 </p>
-                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                <div className="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                   <span className="post-by">
                                     By{" "}
                                     <Link to="/ ">
@@ -346,23 +398,35 @@ const ReletedPostDetails = () => {
                                     </Link>
                                   </span>
                                   <span className="post-on">
-
-                                    {
-                                      Commentresult?.language === "Hi" ? (
-                                        moment().diff(moment(Commentresult?.created_at), 'hours') < 24
-                                          ? moment(Commentresult?.created_at).locale('hi').fromNow()
-                                          : moment(Commentresult?.created_at)
-                                            .locale('hi')
+                                    {Commentresult?.language === "Hi"
+                                      ? moment().diff(
+                                          moment(Commentresult?.created_at),
+                                          "hours"
+                                        ) < 24
+                                        ? moment(Commentresult?.created_at)
+                                            .locale("hi")
+                                            .fromNow()
+                                        : moment(Commentresult?.created_at)
+                                            .locale("hi")
                                             .format("DD MMMM YYYY")
-                                            .replace(/[०१२३४५६७८९]/g, function (match) {
-                                              return "0123456789"["०१२३४५६७८९".indexOf(match)];
-                                            })
-                                      ) : (
-                                        moment().diff(moment(Commentresult?.created_at), 'hours') < 24
-                                          ? moment(Commentresult?.created_at).locale('en').fromNow()
-                                          : moment(Commentresult?.created_at).locale('en').format("DD MMMM YYYY")
-                                      )
-                                    }
+                                            .replace(
+                                              /[०१२३४५६७८९]/g,
+                                              function (match) {
+                                                return "0123456789"[
+                                                  "०१२३४५६७८९".indexOf(match)
+                                                ];
+                                              }
+                                            )
+                                      : moment().diff(
+                                          moment(Commentresult?.created_at),
+                                          "hours"
+                                        ) < 24
+                                      ? moment(Commentresult?.created_at)
+                                          .locale("en")
+                                          .fromNow()
+                                      : moment(Commentresult?.created_at)
+                                          .locale("en")
+                                          .format("DD MMMM YYYY")}
                                   </span>
                                 </div>
                               </div>
@@ -372,13 +436,9 @@ const ReletedPostDetails = () => {
                       })}
                     </div>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
         </main>
         {/* <!-- Footer Start--> */}

@@ -162,11 +162,6 @@ const Home = () => {
     console.log("isCanvasOpen", isCanvasOpen);
   };
 
- 
-useEffect(() => {
-    console.log(" inside home search key : ", searchKey)
-})
-
   return (
     <div>
       <div className={`main-wrap ${isCanvasOpen ? "canvas-opened" : ""}`}>
@@ -204,24 +199,24 @@ useEffect(() => {
                                         </Link>
                                       </div>
                                       <div className="post-content media-body">
-                                        <div class="entry-meta">
-                                          <div class="entry-meta meta-0 font-small mb-20">
-                                            <a to="#" tabindex="0">
-                                              <span class="post-cat bg-success font-small color-white">
+                                        <div className="entry-meta">
+                                          <div className="entry-meta meta-0 font-small mb-20">
+                                            <a to="#" tabIndex="0">
+                                              <span className="post-cat bg-success font-small color-white">
                                                 {tranding_post?.tags}
                                               </span>
                                             </a>
                                           </div>
-                                          <span class="post-in">
+                                          <span className="post-in">
                                             <i
-                                              class="ti-user"
+                                              className="ti-user"
                                               aria-hidden="true"
                                             ></i>{" "}
                                             Admin
                                           </span>
-                                          <span class="post-in">
+                                          <span className="post-in">
                                             <i
-                                              class="ti-alarm-clock"
+                                              className="ti-alarm-clock"
                                               aria-hidden="true"
                                             ></i>{" "}
                                             <span className="post-on">
@@ -264,7 +259,7 @@ useEffect(() => {
                           <div className="loop-list-style-1d">
                             <div className="latestnews_update">
                               <ul
-                                class="nav nav-pills"
+                                className="nav nav-pills"
                                 id="pills-tab"
                                 role="tablist"
                               >

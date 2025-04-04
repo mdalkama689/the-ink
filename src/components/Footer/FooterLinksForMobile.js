@@ -1,45 +1,54 @@
+const FooterLinksForMobile = () => {
+  const links = [
+    {
+      id: 1,
+      url: "#",
+      name: "About",
+    },
+    {
+      id: 2,
+      url: "#",
+      name: "Contact",
+    },
+    {
+      id: 3,
+      url: "/privacy-policy",
+      name: "Privacy Policy",
+    },
+    {
+      id: 4,
+      url: "/terms-condition",
+      name: "Terms and Conditions",
+    },
+    {
+      id: 5,
+      url: "/publisher-details",
+      name: "Publisher Details",
+    },
+  ];
 
-const FooterLinksForMobile =() => {
-    return (
-      <div>
-        <div className="footer-section">
-          <div className="category-heading">
-            <span className="category-heading-text">Quick Links</span>
-          </div>
-          <div className="category-container">
-            <div>
-              <ul className="category-list footer-links-list">
+  return (
+    <div>
+      <div className="footer-section">
+        <div className="category-heading">
+          <span className="category-heading-text">Quick Links</span>
+        </div>
+        <div className="category-container">
+          <div>
+            <ul className="category-list footer-links-list">
+              {links.map((link) => (
                 <li>
-                  <a href="/#" className="category-link">
-                    About
+                  <a href={link.url} className="category-link">
+                    {link.name}
                   </a>
                 </li>
-                <li>
-                  <a href="/#" className="category-link">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="/privacy-policy" className="category-link">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="/terms-condition" className="category-link">
-                    Terms & Conditions
-                  </a>
-                </li>
-                <li>
-                  <a href="/publisher-details" className="category-link">
-                    Publisher Details
-                  </a>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
-  export default FooterLinksForMobile
+export default FooterLinksForMobile;

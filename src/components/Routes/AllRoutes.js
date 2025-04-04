@@ -24,8 +24,7 @@ const AllRoutes = () => {
           <Route path="/Header" element={<Header />} />
           <Route path="/" element={<Home />} />
           {/* <Route path="/NewsDetails/:id" element={<NewsDetails />} /> */}
-          
-          {/* <Route path="/:title/:id" element={<NewsDetails />} /> // changes  */}
+
           <Route path="/:category/:title/:id" element={<NewsDetails />} />
           {/* changes end  */}
           <Route path="/:title1/:id" element={<ReletedPostDetails />} />
@@ -35,18 +34,23 @@ const AllRoutes = () => {
           <Route path="/privacy-policy" element={<Privacypolicy />} />
           <Route path="/privacy-policy-app" element={<PrivacypolicyApp />} />
           <Route path="/publisher-details" element={<PublisherDetailsPage />} />
-          <Route path="/publisher-details-app" element={<PublisherDetailsApp />} />
-          <Route path="/request-data-deletion" element={<RequestDataDeletion />} />
+          <Route
+            path="/publisher-details-app"
+            element={<PublisherDetailsApp />}
+          />
+          <Route
+            path="/request-data-deletion"
+            element={<RequestDataDeletion />}
+          />
           <Route path="/terms-condition" element={<Terms_Condition />} />
-          <Route path="/terms-condition-app" element={<Terms_Condition_App />} />
+          <Route
+            path="/terms-condition-app"
+            element={<Terms_Condition_App />}
+          />
           <Route path="/Contact" element={<Contact />} />
-      
-      {/* start changes */}
-      <Route path="/type/:category" element={<NewsByStateOrAuthor />} />
-      {/* end changes */}
+          <Route path="/type/:category" element={<NewsByStateOrAuthor />} />
         </Routes>
       </HelmetProvider>
-
     </div>
   );
 };

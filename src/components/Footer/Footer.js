@@ -20,7 +20,6 @@ const Footer = ({ activeCategoryId, setActiveCategoryId, categorieList }) => {
       {deviceType == "big" ? (
         <div className="footer-content">
           <Category
-            categorieList={categorieList}
             activeCategoryId={activeCategoryId}
             setActiveCategoryId={setActiveCategoryId}
           />
@@ -29,7 +28,6 @@ const Footer = ({ activeCategoryId, setActiveCategoryId, categorieList }) => {
       ) : (
         <>
           <CategoryForMobile
-            categorieList={categorieList}
             activeCategoryId={activeCategoryId}
             setActiveCategoryId={setActiveCategoryId}
           />

@@ -45,7 +45,9 @@ const Contact = () => {
         : "En",
     };
     await axios
-      .get(`${API_BASE_URL}/web-dashboard?search=${searchKey}&language=${ApiData.language}`)
+      .get(
+        `${API_BASE_URL}/web-dashboard?search=${searchKey}&language=${ApiData.language}`
+      )
       .then((SearchDataResponse) => {
         setWebDashBoard(SearchDataResponse.data.data);
       })
@@ -58,16 +60,19 @@ const Contact = () => {
   const GetWebDashBoard = async () => {
     try {
       const apiData = {
-        language: localStorage.getItem('lang') ? localStorage.getItem('lang') : 'En',
+        language: localStorage.getItem("lang")
+          ? localStorage.getItem("lang")
+          : "En",
       };
 
-      const response = await axios.get(`${API_BASE_URL}/web-dashboard?language=${apiData.language}`);
+      const response = await axios.get(
+        `${API_BASE_URL}/web-dashboard?language=${apiData.language}`
+      );
       setWebDashBoard(response.data.data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     } finally {
       setIsLoading(false); // Set loading to false after the API request completes
-
     }
   };
 
@@ -91,7 +96,7 @@ const Contact = () => {
     }
   };
 
-  //  Top News Categroy Wise 
+  //  Top News Categroy Wise
   const GetTopCategoryNews = async (id) => {
     setIsLoading(true);
     try {
@@ -109,10 +114,9 @@ const Contact = () => {
       console.log(error);
       setIsLoading(true);
     } finally {
-
     }
   };
-  // This Function Use When We select The Language Then show me By Default the First Data 
+  // This Function Use When We select The Language Then show me By Default the First Data
   const GetTopCategoryNews1 = async () => {
     try {
       setIsLoading(true);
@@ -131,7 +135,6 @@ const Contact = () => {
       setIsLoading(false);
     }
   };
-
 
   // This Methods for the Get CateGoriesList
   const GetCategorieList = async () => {
@@ -246,88 +249,133 @@ const Contact = () => {
         )}
         {/* <!-- Main Header --> */}
         <Header />
-       
-        <div>
-        </div>
+
+        <div></div>
         {/* <!-- Main Wrap Start --> */}
         {isLoading ? (
           <Loader />
         ) : (
           <main className="position-relative">
             <div className="container">
-              <div class="row mb-50">
+              <div className="row mb-50">
                 <div className="col-12 mb-50 text-center">
-                  <div class="entry-main-content mt-50">
+                  <div className="entry-main-content mt-50">
                     <h1>Contact us</h1>
-                    <hr class="wp-block-separator is-style-wide" ></hr>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
+                    <hr className="wp-block-separator is-style-wide"></hr>
+                    <p>
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book. It has survived not only five
+                      centuries, but also the leap into electronic typesetting,
+                      remaining essentially unchanged.
+                    </p>
                   </div>
                 </div>
-                <div class="col-lg-8 col-md-6 pr-md-0">
-                  <div class="entry-main-content bg-white p-4">
+                <div className="col-lg-8 col-md-6 pr-md-0">
+                  <div className="entry-main-content bg-white p-4">
                     <h3>Get in touch</h3>
-                    <hr class="wp-block-separator is-style-wide" ></hr>
-                    <form class="form-contact comment_form" action="#">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Name" />
+                    <hr className="wp-block-separator is-style-wide"></hr>
+                    <form className="form-contact comment_form" action="#">
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <input
+                              className="form-control"
+                              name="name"
+                              id="name"
+                              type="text"
+                              placeholder="Name"
+                            />
                           </div>
                         </div>
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <input class="form-control" name="email" id="email" type="email" placeholder="Email" />
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <input
+                              className="form-control"
+                              name="email"
+                              id="email"
+                              type="email"
+                              placeholder="Email"
+                            />
                           </div>
                         </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" name="website" id="website" type="text" placeholder="Phone" />
+                        <div className="col-12">
+                          <div className="form-group">
+                            <input
+                              className="form-control"
+                              name="website"
+                              id="website"
+                              type="text"
+                              placeholder="Phone"
+                            />
                           </div>
                         </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Message"></textarea>
+                        <div className="col-12">
+                          <div className="form-group">
+                            <textarea
+                              className="form-control w-100"
+                              name="comment"
+                              id="comment"
+                              cols="30"
+                              rows="9"
+                              placeholder="Message"
+                            ></textarea>
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <button type="submit" class="button button-contactForm">Send message</button>
+                      <div className="form-group">
+                        <button
+                          type="submit"
+                          className="button button-contactForm"
+                        >
+                          Send message
+                        </button>
                       </div>
                     </form>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 pl-md-0 d-flex">
-
-                  <div class="single-excerpt text-white bg-dark p-4">
+                <div className="col-lg-4 col-md-6 pl-md-0 d-flex">
+                  <div className="single-excerpt text-white bg-dark p-4">
                     <div className="my-auto pt-50">
                       <h3>About</h3>
 
-                      <p className="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                      <p className="text-white">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry.
+                      </p>
                       <div className="address-icon">
-                        <p><span class="mr-5">
-                          <i class="ti-location-pin"></i>
-                        </span>
-                          <div><strong>Address</strong> Lorem 142 Str., 2352, Ipsum, State, USA
+                        <p>
+                          <span className="mr-5">
+                            <i className="ti-location-pin"></i>
+                          </span>
+                          <div>
+                            <strong>Address</strong> Lorem 142 Str., 2352,
+                            Ipsum, State, USA
                           </div>
                         </p>
-                        <p><span class="mr-5">
-                          <i class="ti-mobile"></i>
-                        </span>
-                          <div><strong>Contact</strong> + 9850678910
+                        <p>
+                          <span className="mr-5">
+                            <i className="ti-mobile"></i>
+                          </span>
+                          <div>
+                            <strong>Contact</strong> + 9850678910
                           </div>
                         </p>
-                        <p><span class="mr-5">
-                          <i class="ti-envelope"></i>
-                        </span>
+                        <p>
+                          <span className="mr-5">
+                            <i className="ti-envelope"></i>
+                          </span>
 
-                          <div><strong>Gmail</strong> info@example.com </div></p>
+                          <div>
+                            <strong>Gmail</strong> info@example.com{" "}
+                          </div>
+                        </p>
                       </div>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </div>
           </main>

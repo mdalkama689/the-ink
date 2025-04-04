@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "../../assets/css/color.css";
 import "../../assets/css/style.css";
 import "../../assets/css/responsive.css";
@@ -35,6 +35,7 @@ const Home = () => {
     localStorage.getItem("lang")
   );
   const [CategorieList, setCategorieList] = useState([]);
+
   const [CategoryTopNews, setCategoryTopNews] = useState([]);
   // console.log("CategoryTopNews1231321", CategoryTopNews);
   const [CategoryTopNewsImages, setCategoryTopNewsImages] = useState(
@@ -110,13 +111,11 @@ const Home = () => {
           ? localStorage.getItem("lang")
           : "En",
       };
-    
 
       const response = await axios.get(
         `${API_BASE_URL}/category-topnews?category_id=${activeCategoryId}&language=${ApiData.language}`
       );
 
-      console.log('response : ', response.data)
       setCategoryTopNews(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -205,7 +204,6 @@ const Home = () => {
       // Fetch data for the initial active category
       GetTopCategoryNews(initialCategoryId);
     }
-  
   }, [CategorieList]);
   useEffect(() => {
     // Fetch data for the active category when the language changes
@@ -366,8 +364,6 @@ const Home = () => {
     return `/${category}/${title}/${id}`;
   };
 
-
-
   return (
     <div>
       <div className={`main-wrap ${isCanvasOpen ? "canvas-opened" : ""}`}>
@@ -390,15 +386,15 @@ const Home = () => {
         <div className="main-wrap">
           <div
             id="top-head"
-            class="header-top-bar align-items-center"
+            className="header-top-bar align-items-center"
             style={{
               height: "70px",
             }}
           >
-            <div class="container">
-              <div class="row align-items-center">
-                <div class="col-7 col-md-8">
-                  <ul class="top-head-social m-0">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col-7 col-md-8">
+                  <ul className="top-head-social m-0">
                     <ul className="d-flex">
                       <a href="https://www.facebook.com/">
                         <li>
@@ -494,10 +490,11 @@ const Home = () => {
                   className="justify-content-between m-0 ml-30"
                 >
                   <Nav className="me-auto">
-                    {CategorieList?.map((CategorieListResult) => {
+                    {CategorieList?.map((CategorieListResult, ind) => {
                       return (
                         <>
                           <a
+                            key={ind}
                             href={`#cat_sec_${CategorieListResult?.id}`}
                             role="tab"
                             aria-controls="pills-home"
@@ -521,19 +518,19 @@ const Home = () => {
                         GetSearchData(searchKey);
                       }}
                     >
-                      <div class="buscar-caja">
+                      <div className="buscar-caja">
                         <input
                           type="text"
                           name="search"
                           value={searchKey}
                           onChange={(e) => setSearchKey(e.target.value)}
-                          class="buscar-txt"
+                          className="buscar-txt"
                           placeholder="Search ....."
                         />
-                        <a class="buscar-btn">
+                        <a className="buscar-btn">
                           {" "}
                           <i
-                            class="fa fa-search"
+                            className="fa fa-search"
                             onClick={(e) => GetSearchData(e.target.value)}
                           ></i>{" "}
                         </a>
@@ -558,19 +555,19 @@ const Home = () => {
                           GetSearchData(searchKey);
                         }}
                       >
-                        <div class="buscar-caja">
+                        <div className="buscar-caja">
                           <input
                             type="text"
                             name=""
                             value={searchKey}
                             onChange={(e) => setSearchKey(e.target.value)}
-                            class="buscar-txt"
+                            className="buscar-txt"
                             placeholder="Search ....."
                           />
-                          <a class="buscar-btn">
+                          <a className="buscar-btn">
                             {" "}
                             <i
-                              class="fa fa-search"
+                              className="fa fa-search"
                               onClick={(e) => GetSearchData(e.target.value)}
                             ></i>{" "}
                           </a>
@@ -664,7 +661,7 @@ const Home = () => {
                       </div>
                     )}
                   </div>
-                  <div class="tab-content mt-3" id="pills-tabContent">
+                  <div className="tab-content mt-3" id="pills-tabContent">
                     <div
                       class="tab-pane fade show active"
                       id="pills-home"
@@ -1043,7 +1040,7 @@ const Home = () => {
                                       // to={`/${encodeURIComponent(
                                       //   postsResult?.title
                                       // )}/${postsResult?.id}`}
-
+                                      key={postsResult?.id}
                                       to={generatePath(postsResult)}
                                     >
                                       <article
@@ -1065,8 +1062,8 @@ const Home = () => {
                                                 {postsResult?.title}
                                               </Link>
 
-                                              <div class="mt-1">
-                                                <span class="post-in">
+                                              <div className="mt-1">
+                                                <span className="post-in">
                                                   {" "}
                                                   <span
                                                     className="post-on"
@@ -1139,7 +1136,7 @@ const Home = () => {
                       </div>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-profile"
                       role="tabpanel"
                       aria-labelledby="pills-profile-tab"
@@ -1160,19 +1157,19 @@ const Home = () => {
                               <div className="mini_post position_bottom">
                                 <div className="entry-meta meta-1 color-grey float-left mb-15 w-100 text-white">
                                   <div class="entry-meta meta-0 font-small mb-30">
-                                    <a to="#" tabindex="0">
+                                    <a to="#" tabIndex="0">
                                       <span class="post-cat bg-danger font-small color-white">
                                         Politics
                                       </span>
                                     </a>
                                   </div>
                                   <span className="post-by">
-                                    <i class="ti-user"></i>{" "}
+                                    <i className="ti-user"></i>{" "}
                                     <Link to="#">Admin</Link>
                                   </span>
                                   <span className="post-in">
                                     <i
-                                      class="ti-alarm-clock"
+                                      className="ti-alarm-clock"
                                       aria-hidden="true"
                                     ></i>{" "}
                                     September 20, 2018
@@ -1318,7 +1315,7 @@ const Home = () => {
                       </div>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact"
                       role="tabpanel"
                       aria-labelledby="pills-contact-tab"
@@ -1338,16 +1335,16 @@ const Home = () => {
                               </div>
                               <div className="mini_post position_bottom">
                                 <div className="entry-meta meta-1 color-grey float-left mb-15 w-100 text-white">
-                                  <div class="entry-meta meta-0 font-small mb-30">
-                                    <Link to="#" tabindex="0">
-                                      <span class="post-cat bg-danger font-small color-white">
+                                  <div className="entry-meta meta-0 font-small mb-30">
+                                    <Link to="#" tabIndex="0">
+                                      <span className="post-cat bg-danger font-small color-white">
                                         Politics
                                       </span>
                                     </Link>
                                   </div>
                                   <span className="post-in">
                                     <i
-                                      class="ti-alarm-clock"
+                                      className="ti-alarm-clock"
                                       aria-hidden="true"
                                     ></i>{" "}
                                     September 20, 2018
@@ -1498,9 +1495,9 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="border border-3"></div>
-                    <div class="tab-content mt-3" id="pills-tabContent">
+                    <div className="tab-content mt-3" id="pills-tabContent">
                       <div
-                        class="tab-pane fade show active"
+                        className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
                         aria-labelledby="pills-home-tab"
@@ -1541,7 +1538,7 @@ const Home = () => {
                                                 </div>
 
                                                 <div className="mt-1">
-                                                  <span class="post-in mt-2">
+                                                  <span className="post-in mt-2">
                                                     <span
                                                       className="post-on"
                                                       style={{
@@ -1615,7 +1612,7 @@ const Home = () => {
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        className="tab-pane fade"
                         id="pills-profile"
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"
@@ -1691,9 +1688,9 @@ const Home = () => {
                                                     result?.short_decription,
                                                 }}
                                               ></p>
-                                              <div class="entry-meta">
+                                              <div className="entry-meta">
                                                 <span
-                                                  class="post-in"
+                                                  className="post-in"
                                                   style={{ fontWeight: "500" }}
                                                 >
                                                   {result?.language === "Hi"
@@ -1751,7 +1748,7 @@ const Home = () => {
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        className="tab-pane fade"
                         id="pills-contact"
                         role="tabpanel"
                         aria-labelledby="pills-contact-tab"
@@ -1811,18 +1808,18 @@ const Home = () => {
                                               )}
                                             </div>
                                             <div className="post-content media-body">
-                                              <div class="entry-meta">
-                                                <div class="entry-meta meta-0 font-small mb-20">
-                                                  <a to="#" tabindex="0">
-                                                    <span class="post-cat bg-success font-small color-white">
+                                              <div className="entry-meta">
+                                                <div className="entry-meta meta-0 font-small mb-20">
+                                                  <a to="#" tabIndex="0">
+                                                    <span className="post-cat bg-success font-small color-white">
                                                       Life Style
                                                     </span>
                                                   </a>
                                                 </div>
                                                 {/* <span class="post-in"><i class="ti-user" aria-hidden="true"></i> Admin</span> */}
-                                                <span class="post-in">
+                                                <span className="post-in">
                                                   <i
-                                                    class="ti-alarm-clock"
+                                                    className="ti-alarm-clock"
                                                     aria-hidden="true"
                                                   ></i>{" "}
                                                   September 20, 2018
@@ -1933,8 +1930,8 @@ const Home = () => {
                           id={`cat_sec_${categoryResult?.id}`}
                         >
                           <div className="col-12">
-                            <div class="mb-2 pb-2 p-0">
-                              <div class="topstories_title px-4 py-2 bg-success text-white">
+                            <div className="mb-2 pb-2 p-0">
+                              <div className="topstories_title px-4 py-2 bg-success text-white">
                                 {categoryResult?.title}{" "}
                               </div>
                             </div>
@@ -2347,10 +2344,9 @@ const Home = () => {
         )}
 
         {/* <!-- Footer Start--> */}
-        <Footer  
-        activeCategoryId={activeCategoryId}
-       setActiveCategoryId={setActiveCategoryId}
-      categorieList={CategorieList}
+        <Footer
+          activeCategoryId={activeCategoryId}
+          setActiveCategoryId={setActiveCategoryId}
         />
       </div>
       {/* <!-- Main Wrap End--> */}

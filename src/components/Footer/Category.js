@@ -1,30 +1,48 @@
-const Category = ({ activeCategoryId, setActiveCategoryId, categorieList }) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../config/Config";
+
+const Category = ({ activeCategoryId, setActiveCategoryId }) => {
+  const [CategorieList, setCategorieList] = useState([]);
+
+  useEffect(() => {
+    const GetCategorieList = async () => {
+      await axios.get(`${API_BASE_URL}/category-list`).then((response) => {
+        setCategorieList(response.data.data);
+      });
+    };
+
+    GetCategorieList();
+  }, []);
+
   const noOfCols = 2;
-  const splitIndex = Math.ceil(categorieList.length / noOfCols);
-  const categoryColumns = [
-    categorieList.slice(0, splitIndex),
-    categorieList.slice(splitIndex),
+  const splitIndex =
+    CategorieList && Math.ceil(CategorieList?.length / noOfCols);
+  const categoryColumns = CategorieList && [
+    CategorieList.slice(0, splitIndex),
+    CategorieList.slice(splitIndex),
   ];
 
   return (
     <div className="footer-section">
       <div className="footerheading">Popular Categories</div>
       <div className="category-container">
-        {categoryColumns.map((col, ind) => (
-          <CategoryColumn
-            key={ind}
-            activeCategoryId={activeCategoryId}
-            categorieList={col}
-            setActiveCategoryId={setActiveCategoryId}
-          />
-        ))}
+        {CategorieList &&
+          categoryColumns.map((col, ind) => (
+            <CategoryColumn
+              key={ind}
+              activeCategoryId={activeCategoryId}
+              CategorieList={col}
+              setActiveCategoryId={setActiveCategoryId}
+            />
+          ))}
       </div>
     </div>
   );
 };
 
 function CategoryColumn({
-  categorieList,
+  CategorieList,
   activeCategoryId,
   setActiveCategoryId,
 }) {
@@ -36,7 +54,7 @@ function CategoryColumn({
   return (
     <div>
       <ul className="category-list">
-        {categorieList.map((item) => (
+        {CategorieList.map((item) => (
           <li key={item.id} onClick={() => handleSearchKey(item.id)}>
             <div
               className={`category-link category-link-div ${

@@ -397,9 +397,9 @@ const NewsDetails = () => {
               <div className="container">
                 <div className="row mb-50 pt-100">
                   <div className="col-lg-8 col-md-12 ">
-                    <div class="entry-bottom mb-20">
-                      <div class="overflow-hidden">
-                        <div class="tags text-muted font-small pt-1 my-auto">
+                    <div className="entry-bottom mb-20">
+                      <div className="overflow-hidden">
+                        <div className="tags text-muted font-small pt-1 my-auto">
                           {/* <span className="entry-meta meta-0 font-small mb-30">
                     <Link to="/" className="p-0">
                       <span className="post-cat bg-success color-white py-2">
@@ -408,7 +408,7 @@ const NewsDetails = () => {
                     </Link>
                   </span> */}
                           {/* <span className="post-by py-2"> <Link to="#"><i class="ti-user"></i> {NewsDetails?.data?.author_name} </Link></span> */}
-                          <span class="update-on">
+                          <span className="update-on">
                             {NewsDetails?.data?.language === "Hi"
                               ? moment().diff(
                                   moment(NewsDetails?.data?.created_at),
@@ -454,12 +454,21 @@ const NewsDetails = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        {console.log(" stateName?.replaceAltoLowerCase(): ", stateName?.replaceAll(" ", "-")?.toLowerCase())}
+                        {console.log(
+                          " stateName?.replaceAltoLowerCase(): ",
+                          stateName?.replaceAll(" ", "-")?.toLowerCase()
+                        )}
 
-                        <Link 
-                        to={`/type/${stateName?.replaceAll(" ", "-")?.toLowerCase()}`}>{stateName} | </Link>
-                        <Link 
-                         to={`/type/${authorName?.toLowerCase()}`}>{authorName} |</Link>
+                        <Link
+                          to={`/type/${stateName
+                            ?.replaceAll(" ", "-")
+                            ?.toLowerCase()}`}
+                        >
+                          {stateName} |{" "}
+                        </Link>
+                        <Link to={`/type/${authorName?.toLowerCase()}`}>
+                          {authorName} |
+                        </Link>
                         <p
                           style={{
                             marginTop: "16px",
