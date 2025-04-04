@@ -34,7 +34,10 @@ const NewsDetails = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang")
   );
-  const [shortDetails, setShortDetails] = useState("");
+
+  const [authorName, setAuthorName] = useState("");
+  const [stateName, setStateName] = useState("");
+  const [updatedAt, setUpdatedAt] = useState("");
 
   const { id } = useParams();
 
@@ -172,10 +175,14 @@ const NewsDetails = () => {
     hour = hour > 12 ? hour - 12 : hour;
 
     const date_in_good_form = `Last updated: ${date}-${months[month]}-${year}, ${hour}:${minute} ${timePeriod}`;
-    const all_details_in_format = `${state} | ${formatted_author_name} | ${date_in_good_form}`;
+    // const all_details_in_format = `${state} | ${formatted_author_name} | ${date_in_good_form}`;
 
-    setShortDetails(all_details_in_format);
+    setAuthorName(formatted_author_name);
+    setStateName(state);
+    setUpdatedAt(date_in_good_form);
+    // setShortDetails(all_details_in_format);
   }, [NewsDetails]);
+
   return (
     <div>
       <div className={`main-wrap ${isCanvasOpen ? "canvas-opened" : ""}`}>
@@ -336,7 +343,7 @@ const NewsDetails = () => {
                       </div>
                     </form>
                   </Nav> */}
-              {/* </Navbar.Collapse> */} 
+              {/* </Navbar.Collapse> */}
               <Category CategorieList={CategorieList} />
             </Container>
 
@@ -436,7 +443,31 @@ const NewsDetails = () => {
                       <h4 className="post-title 1hbase mb-20">
                         {NewsDetails?.data?.title}
                       </h4>
-                      <p>{shortDetails}</p>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "start",
+                          gap: "10px",
+                          marginBottom: "10px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {console.log(" stateName?.replaceAltoLowerCase(): ", stateName?.replaceAll(" ", "-")?.toLowerCase())}
+
+                        <Link 
+                        to={`/type/${stateName?.replaceAll(" ", "-")?.toLowerCase()}`}>{stateName} | </Link>
+                        <Link 
+                         to={`/type/${authorName?.toLowerCase()}`}>{authorName} |</Link>
+                        <p
+                          style={{
+                            marginTop: "16px",
+                          }}
+                        >
+                          {updatedAt}
+                        </p>
+                      </div>
                     </div>
                     <div className="news_post_view">
                       {NewsDetails?.data ? (
@@ -695,35 +726,32 @@ const NewsDetails = () => {
 
 export default NewsDetails;
 
-
- function Category({CategorieList}){
+function Category({ CategorieList }) {
   return (
- <>
-   <Navbar.Toggle aria-controls="navbarScroll" />
-              <Navbar.Collapse
-                id="navbarScroll"
-                className="justify-content-between m-0 ml-30"
-              >
-                <Nav className="me-auto">
-                  {CategorieList?.map((CategorieListResult) => {
-                    return (
-                      <>
-                        <Link
-                          to="/"
-                          role="tab"
-                          // onClick={() => GetWebDashBoardCategory(CategorieListResult?.id)}
-                          aria-controls="pills-home"
-                          aria-selected="true"
-                        >
-                        
-                          {CategorieListResult?.title}
-                        </Link>
-                      </>
-                    );
-                  })}
-             
-                </Nav>
-                {/* <Nav className="d-none d-md-none d-lg-block">
+    <>
+      <Navbar.Toggle aria-controls="navbarScroll" />
+      <Navbar.Collapse
+        id="navbarScroll"
+        className="justify-content-between m-0 ml-30"
+      >
+        <Nav className="me-auto">
+          {CategorieList?.map((CategorieListResult) => {
+            return (
+              <>
+                <Link
+                  to="/"
+                  role="tab"
+                  // onClick={() => GetWebDashBoardCategory(CategorieListResult?.id)}
+                  aria-controls="pills-home"
+                  aria-selected="true"
+                >
+                  {CategorieListResult?.title}
+                </Link>
+              </>
+            );
+          })}
+        </Nav>
+        {/* <Nav className="d-none d-md-none d-lg-block">
                     <form
                       action="#"
                       method="get"
@@ -743,7 +771,7 @@ export default NewsDetails;
                       </div>
                     </form>
                   </Nav> */}
-              </Navbar.Collapse>
- </>
-  )
+      </Navbar.Collapse>
+    </>
+  );
 }

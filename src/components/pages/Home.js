@@ -113,7 +113,7 @@ const Home = () => {
       const response = await axios.get(
         `${API_BASE_URL}/category-topnews?category_id=${activeCategoryId}&language=${ApiData.language}`
       );
-   
+
       setCategoryTopNews(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -331,6 +331,36 @@ const Home = () => {
     // Cleanup intervals when the component unmounts
     return () => intervalIds.forEach(clearInterval);
   }, [webDashBoard]);
+
+  // to generate url for the new link
+  // for both hindi and english
+  const generatePath = (value) => {
+    if (!value) return;
+    let title = "";
+
+    if (selectedLanguage.toLowerCase() === "hi") {
+      title = value.title
+        ?.replace(/[^\w\s\u0900-\u097F]/g, "-")
+        ?.replace(/\s+/g, "-")
+        ?.replace(/-+/g, "-")
+        ?.replace(/^-+|-+$/g, "");
+    } else {
+      title = value.title
+        .replace(/[^a-zA-Z]/g, "-")
+        .replace(/-+/g, "-")
+        .toLowerCase();
+    }
+    const category = value.type
+      ? value.type.toLowerCase()
+      : value.get_category.title.toLowerCase();
+
+    const id = value.id;
+    // const title = value.title.replace(/[^a-zA-Z]/g, "-")
+    //   .replace(/-+/g, "-")
+    //    .toLowerCase();
+
+    return `/${category}/${title}/${id}`;
+  };
 
   return (
     <div>
@@ -578,10 +608,7 @@ const Home = () => {
                                 //   webDashBoardResult?.title
                                 // )}/${webDashBoardResult?.id}`}
                                 className="marquee-item"
-                                to={`/${webDashBoardResult.get_category.title.toLowerCase()}/${webDashBoardResult.title
-                                  .replace(/[^a-zA-Z]/g, "-")
-                                  .replace(/-+/g, "-")
-                                  .toLowerCase()}/${webDashBoardResult.id}`}
+                                to={generatePath(webDashBoardResult)}
                               >
                                 {webDashBoardResult?.title} &nbsp; | &nbsp;
                               </Link>
@@ -658,10 +685,7 @@ const Home = () => {
                                           //   fadeImage?.title
                                           // )}/${fadeImage?.id}`}
 
-                                          to={`/${fadeImage.get_category.title.toLowerCase()}/${fadeImage.title
-                                            .replace(/[^a-zA-Z]/g, "-")
-                                            .replace(/-+/g, "-")
-                                            .toLowerCase()}/${fadeImage.id}`}
+                                          to={generatePath(fadeImage)}
                                         >
                                           <img
                                             className="img-fluid w-100"
@@ -681,10 +705,7 @@ const Home = () => {
                                           //   fadeImage?.title
                                           // )}/${fadeImage?.id}`}
 
-                                          to={`/${fadeImage.get_category.title.toLowerCase()}/${fadeImage.title
-                                            .replace(/[^a-zA-Z]/g, "-")
-                                            .replace(/-+/g, "-")
-                                            .toLowerCase()}/${fadeImage.id}`}
+                                          to={generatePath(fadeImage)}
                                         >
                                           <video
                                             ref={(el) =>
@@ -712,9 +733,10 @@ const Home = () => {
                                       <div>
                                         <Link
                                           className="thumb_images mobile_auto_w"
-                                          to={`/${encodeURIComponent(
-                                            fadeImage?.title
-                                          )}/${fadeImage?.id}`}
+                                          // to={`/${encodeURIComponent(
+                                          //   fadeImage?.title
+                                          // )}/${fadeImage?.id}`}
+                                          to={generatePath(fadeImage)}
                                         >
                                           <img
                                             className="img-fluid w-100"
@@ -734,10 +756,7 @@ const Home = () => {
                                       //   fadeImage?.title
                                       // )}/${fadeImage?.id}`}
 
-                                      to={`/${fadeImage.get_category.title.toLowerCase()}/${fadeImage.title
-                                        .replace(/[^a-zA-Z]/g, "-")
-                                        .replace(/-+/g, "-")
-                                        .toLowerCase()}/${fadeImage.id}`}
+                                      to={generatePath(fadeImage)}
                                     >
                                       {fadeImage?.title}
                                     </Link>
@@ -746,10 +765,7 @@ const Home = () => {
                                         className="SliderImagesTitle p-0"
                                         // to={`/NewsDetails/${fadeImage?.id}`}
 
-                                        to={`/${fadeImage.get_category.title.toLowerCase()}/${fadeImage.title
-                                          .replace(/[^a-zA-Z]/g, "-")
-                                          .replace(/-+/g, "-")
-                                          .toLowerCase()}/${fadeImage.id}`}
+                                        to={generatePath(fadeImage)}
                                       >
                                         {ReactHtmlParser(
                                           fadeImage?.short_decription
@@ -815,12 +831,7 @@ const Home = () => {
                                               //   postsResult?.title
                                               // )}/${postsResult?.id}`}
 
-                                              to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                .replace(/[^a-zA-Z]/g, "-")
-                                                .replace(/-+/g, "-")
-                                                .toLowerCase()}/${
-                                                postsResult.id
-                                              }`}
+                                              to={generatePath(postsResult)}
                                             >
                                               <article className="background-white politics_right_box mb-20 wow fadeIn animated post_data">
                                                 <div className="post_boxes">
@@ -840,15 +851,9 @@ const Home = () => {
                                                         //   postsResult?.title
                                                         // )}/${postsResult?.id}`}
 
-                                                        to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                          .replace(
-                                                            /[^a-zA-Z]/g,
-                                                            "-"
-                                                          )
-                                                          .replace(/-+/g, "-")
-                                                          .toLowerCase()}/${
-                                                          postsResult.id
-                                                        }`}
+                                                        to={generatePath(
+                                                          postsResult
+                                                        )}
                                                       >
                                                         <img
                                                           className="img-fluid"
@@ -873,15 +878,9 @@ const Home = () => {
                                                         //   postsResult?.title
                                                         // )}/${postsResult?.id}`}
 
-                                                        to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                          .replace(
-                                                            /[^a-zA-Z]/g,
-                                                            "-"
-                                                          )
-                                                          .replace(/-+/g, "-")
-                                                          .toLowerCase()}/${
-                                                          postsResult.id
-                                                        }`}
+                                                        to={generatePath(
+                                                          postsResult
+                                                        )}
                                                       >
                                                         <video
                                                           ref={(el) =>
@@ -915,15 +914,9 @@ const Home = () => {
                                                         //   postsResult?.title
                                                         // )}/${postsResult?.id}`}
 
-                                                        to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                          .replace(
-                                                            /[^a-zA-Z]/g,
-                                                            "-"
-                                                          )
-                                                          .replace(/-+/g, "-")
-                                                          .toLowerCase()}/${
-                                                          postsResult.id
-                                                        }`}
+                                                        to={generatePath(
+                                                          postsResult
+                                                        )}
                                                       >
                                                         <img
                                                           className="img-fluid"
@@ -947,15 +940,9 @@ const Home = () => {
                                                         //   postsResult?.title
                                                         // )}/${postsResult?.id}`}
 
-                                                        to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                          .replace(
-                                                            /[^a-zA-Z]/g,
-                                                            "-"
-                                                          )
-                                                          .replace(/-+/g, "-")
-                                                          .toLowerCase()}/${
-                                                          postsResult.id
-                                                        }`}
+                                                        to={generatePath(
+                                                          postsResult
+                                                        )}
                                                         className="SliderImagesTitle1"
                                                       >
                                                         {postsResult?.title}
@@ -1051,10 +1038,7 @@ const Home = () => {
                                       //   postsResult?.title
                                       // )}/${postsResult?.id}`}
 
-                                      to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                        .replace(/[^a-zA-Z]/g, "-")
-                                        .replace(/-+/g, "-")
-                                        .toLowerCase()}/${postsResult.id}`}
+                                      to={generatePath(postsResult)}
                                     >
                                       <article
                                         key={postsResult?.id}
@@ -1069,12 +1053,7 @@ const Home = () => {
                                                 //   postsResult?.title
                                                 // )}/${postsResult?.id}`}
 
-                                                to={`/${postsResult.get_category.title.toLowerCase()}/${postsResult.title
-                                                  .replace(/[^a-zA-Z]/g, "-")
-                                                  .replace(/-+/g, "-")
-                                                  .toLowerCase()}/${
-                                                  postsResult.id
-                                                }`}
+                                                to={generatePath(postsResult)}
                                                 className="SliderImagesTitle2"
                                               >
                                                 {postsResult?.title}
@@ -1534,10 +1513,7 @@ const Home = () => {
                                       //   tranding_post?.title
                                       // )}/${tranding_post?.id}`}
 
-                                      to={`${tranding_post.get_category.title.toLowerCase()}/${tranding_post.title
-                                        .replace(/[^a-zA-Z]/g, "-")
-                                        .replace(/-+/g, "-")
-                                        .toLowerCase()}/${tranding_post.id}`}
+                                      to={generatePath(tranding_post)}
                                     >
                                       <article className="background-white politics_right_box wow fadeIn animated post_data">
                                         <div className="post_boxes">
@@ -1550,15 +1526,9 @@ const Home = () => {
                                                     //   tranding_post?.title
                                                     // )}/${tranding_post?.id}`}
 
-                                                    to={`${tranding_post.get_category.title.toLowerCase()}/${tranding_post.title
-                                                      .replace(
-                                                        /[^a-zA-Z]/g,
-                                                        "-"
-                                                      )
-                                                      .replace(/-+/g, "-")
-                                                      .toLowerCase()}/${
-                                                      tranding_post.id
-                                                    }`}
+                                                    to={generatePath(
+                                                      tranding_post
+                                                    )}
                                                   >
                                                     {tranding_post?.title}
                                                   </Link>
@@ -1653,9 +1623,10 @@ const Home = () => {
                                   return (
                                     <>
                                       <Link
-                                        to={`/${encodeURIComponent(
-                                          result?.title
-                                        )}/${result?.id}`}
+                                        // to={`/${encodeURIComponent(
+                                        //   result?.title
+                                        // )}/${result?.id}`}
+                                        to={generatePath(result)}
                                       >
                                         <article
                                           key={result?.id}
@@ -1666,9 +1637,10 @@ const Home = () => {
                                               {result?.file_type == "image" ? (
                                                 <Link
                                                   className="color-white"
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   <img
                                                     className="img-fluid"
@@ -1682,9 +1654,10 @@ const Home = () => {
                                               ) : (
                                                 <Link
                                                   className="color-white"
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   <img
                                                     className="img-fluid"
@@ -1697,9 +1670,10 @@ const Home = () => {
                                             <div className="post-content media-body">
                                               <div className="post-title w-100">
                                                 <Link
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   {result?.title}
                                                 </Link>
@@ -1785,9 +1759,11 @@ const Home = () => {
                                   return (
                                     <>
                                       <Link
-                                        to={`/${encodeURIComponent(
-                                          result?.title
-                                        )}/${result?.id}`}
+                                        // to={`/${encodeURIComponent(
+                                        //   result?.title
+                                        // )}/${result?.id}`}
+
+                                        to={generatePath(result)}
                                       >
                                         <article
                                           key={result?.id}
@@ -1798,9 +1774,10 @@ const Home = () => {
                                               {result?.file_type == "image" ? (
                                                 <Link
                                                   className="color-white"
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   <img
                                                     className="img-fluid"
@@ -1814,9 +1791,10 @@ const Home = () => {
                                               ) : (
                                                 <Link
                                                   className="color-white"
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   <img
                                                     className="img-fluid"
@@ -1846,9 +1824,10 @@ const Home = () => {
                                               </div>
                                               <div className="post-title w-100">
                                                 <Link
-                                                  to={`/${encodeURIComponent(
-                                                    result?.title
-                                                  )}/${result?.id}`}
+                                                  // to={`/${encodeURIComponent(
+                                                  //   result?.title
+                                                  // )}/${result?.id}`}
+                                                  to={generatePath(result)}
                                                 >
                                                   {result?.title}
                                                 </Link>
@@ -1966,12 +1945,7 @@ const Home = () => {
                                       //   GetPostsIndexResult?.title
                                       // )}/${GetPostsIndexResult?.id}`}
 
-                                      to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                        .replace(/[^a-zA-Z]/g, "-")
-                                        .replace(/-+/g, "-")
-                                        .toLowerCase()}/${
-                                        GetPostsIndexResult.id
-                                      }`}
+                                      to={generatePath(GetPostsIndexResult)}
                                     >
                                       <article className="bg-white wow fadeIn animated position-relative">
                                         <div className="post__banner post-thumb img-hover-scale ">
@@ -1983,12 +1957,9 @@ const Home = () => {
                                               //   GetPostsIndexResult?.title
                                               // )}/${GetPostsIndexResult?.id}`}
 
-                                              to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                                .replace(/[^a-zA-Z]/g, "-")
-                                                .replace(/-+/g, "-")
-                                                .toLowerCase()}/${
-                                                GetPostsIndexResult.id
-                                              }`}
+                                              to={generatePath(
+                                                GetPostsIndexResult
+                                              )}
                                             >
                                               <img
                                                 className="img-fluid w-100"
@@ -2007,12 +1978,9 @@ const Home = () => {
                                               //   GetPostsIndexResult?.title
                                               // )}/${GetPostsIndexResult?.id}`}
 
-                                              to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                                .replace(/[^a-zA-Z]/g, "-")
-                                                .replace(/-+/g, "-")
-                                                .toLowerCase()}/${
-                                                GetPostsIndexResult.id
-                                              }`}
+                                              to={generatePath(
+                                                GetPostsIndexResult
+                                              )}
                                             >
                                               <video
                                                 className="img-fluid w-100"
@@ -2041,12 +2009,9 @@ const Home = () => {
                                               //   GetPostsIndexResult?.title
                                               // )}/${GetPostsIndexResult?.id}`}
 
-                                              to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                                .replace(/[^a-zA-Z]/g, "-")
-                                                .replace(/-+/g, "-")
-                                                .toLowerCase()}/${
-                                                GetPostsIndexResult.id
-                                              }`}
+                                              to={generatePath(
+                                                GetPostsIndexResult
+                                              )}
                                             >
                                               <img
                                                 className="img-fluid w-100"
@@ -2065,12 +2030,9 @@ const Home = () => {
                                               //   GetPostsIndexResult?.title
                                               // )}/${GetPostsIndexResult?.id}`}
 
-                                              to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                                .replace(/[^a-zA-Z]/g, "-")
-                                                .replace(/-+/g, "-")
-                                                .toLowerCase()}/${
-                                                GetPostsIndexResult.id
-                                              }`}
+                                              to={generatePath(
+                                                GetPostsIndexResult
+                                              )}
                                             >
                                               {GetPostsIndexResult?.title}
                                             </Link>
@@ -2081,12 +2043,9 @@ const Home = () => {
                                             //   GetPostsIndexResult?.title
                                             // )}/${GetPostsIndexResult?.id}`}
 
-                                            to={`/${GetPostsIndexResult.type.toLowerCase()}/${GetPostsIndexResult.title
-                                              .replace(/[^a-zA-Z]/g, "-")
-                                              .replace(/-+/g, "-")
-                                              .toLowerCase()}/${
-                                              GetPostsIndexResult.id
-                                            }`}
+                                            to={generatePath(
+                                              GetPostsIndexResult
+                                            )}
                                           >
                                             {ReactHtmlParser(
                                               GetPostsIndexResult?.short_decription
@@ -2236,12 +2195,7 @@ const Home = () => {
                                           //   GetPostsResult?.title
                                           // )}/${GetPostsResult?.id}`}
 
-                                          to={`/${GetPostsResult.type.toLowerCase()}/${GetPostsResult.title
-                                            .replace(/[^a-zA-Z]/g, "-")
-                                            .replace(/-+/g, "-")
-                                            .toLowerCase()}/${
-                                            GetPostsResult.id
-                                          }`}
+                                          to={generatePath(GetPostsResult)}
                                         >
                                           <article className="background-white politics_right_box mb-25 wow fadeIn animated post_data">
                                             <div className="post_boxes">
@@ -2254,15 +2208,9 @@ const Home = () => {
                                                     //   GetPostsResult?.title
                                                     // )}/${GetPostsResult?.id}`}
 
-                                                    to={`/${GetPostsResult.type.toLowerCase()}/${GetPostsResult.title
-                                                      .replace(
-                                                        /[^a-zA-Z]/g,
-                                                        "-"
-                                                      )
-                                                      .replace(/-+/g, "-")
-                                                      .toLowerCase()}/${
-                                                      GetPostsResult.id
-                                                    }`}
+                                                    to={generatePath(
+                                                      GetPostsResult
+                                                    )}
                                                   >
                                                     <img
                                                       className="img-fluid w-100"
@@ -2281,15 +2229,9 @@ const Home = () => {
                                                     //   GetPostsResult?.title
                                                     // )}/${GetPostsResult?.id}`}
 
-                                                    to={`/${GetPostsResult.type.toLowerCase()}/${GetPostsResult.title
-                                                      .replace(
-                                                        /[^a-zA-Z]/g,
-                                                        "-"
-                                                      )
-                                                      .replace(/-+/g, "-")
-                                                      .toLowerCase()}/${
-                                                      GetPostsResult.id
-                                                    }`}
+                                                    to={generatePath(
+                                                      GetPostsResult
+                                                    )}
                                                   >
                                                     <video
                                                       ref={(el) =>
@@ -2318,15 +2260,9 @@ const Home = () => {
                                                     //   GetPostsResult?.title
                                                     // )}/${GetPostsResult?.id}`}
 
-                                                    to={`/${GetPostsResult.type.toLowerCase()}/${GetPostsResult.title
-                                                      .replace(
-                                                        /[^a-zA-Z]/g,
-                                                        "-"
-                                                      )
-                                                      .replace(/-+/g, "-")
-                                                      .toLowerCase()}/${
-                                                      GetPostsResult.id
-                                                    }`}
+                                                    to={generatePath(
+                                                      GetPostsResult
+                                                    )}
                                                   >
                                                     <img
                                                       className="img-fluid w-100"
@@ -2345,15 +2281,9 @@ const Home = () => {
                                                     //   GetPostsResult?.title
                                                     // )}/${GetPostsResult?.id}`}
 
-                                                    to={`/${GetPostsResult.type.toLowerCase()}/${GetPostsResult.title
-                                                      .replace(
-                                                        /[^a-zA-Z]/g,
-                                                        "-"
-                                                      )
-                                                      .replace(/-+/g, "-")
-                                                      .toLowerCase()}/${
-                                                      GetPostsResult.id
-                                                    }`}
+                                                    to={generatePath(
+                                                      GetPostsResult
+                                                    )}
                                                   >
                                                     {GetPostsResult?.title}
                                                   </Link>
@@ -2386,10 +2316,7 @@ const Home = () => {
                               //   webDashBoardTitle?.title
                               // )}/${webDashBoardTitle?.id}`}
 
-                              to={`/${webDashBoardTitle.get_category.title.toLowerCase()}/${webDashBoardTitle.title
-                                .replace(/[^a-zA-Z]/g, "-")
-                                .replace(/-+/g, "-")
-                                .toLowerCase()}/${webDashBoardTitle.id}`}
+                              to={generatePath(webDashBoardTitle)}
                             >
                               <span className="Footer_Only_Title_Number">
                                 {index + 1}
@@ -2414,7 +2341,7 @@ const Home = () => {
         )}
 
         {/* <!-- Footer Start--> */}
-        <Footer />
+        <Footer setSearchKey={setSearchKey} />
       </div>
       {/* <!-- Main Wrap End--> */}
       <div className="dark-mark"></div>
@@ -2442,4 +2369,3 @@ const Home = () => {
   );
 };
 export default Home;
-

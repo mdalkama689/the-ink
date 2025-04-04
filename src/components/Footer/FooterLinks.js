@@ -7,12 +7,12 @@ const FooterLinks = () => {
         <div>
           <ul className="category-list">
             <li>
-              <a href="#" className="category-link">
+              <a href="/#" className="category-link">
                 About
               </a>
             </li>
             <li>
-              <a href="#" className="category-link">
+              <a href="/#" className="category-link">
                 Contact
               </a>
             </li>

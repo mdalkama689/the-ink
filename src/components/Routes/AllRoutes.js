@@ -15,6 +15,7 @@ import PrivacypolicyApp from "../pages/PrivacyPloicyApp";
 import PublisherDetailsApp from "../pages/PublisherDetailsApp";
 import Terms_Condition_App from "../pages/Terms_Condition_App";
 import { HelmetProvider } from "react-helmet-async";
+import NewsByStateOrAuthor from "../pages/NewsByStateOrAuthor";
 const AllRoutes = () => {
   return (
     <div>
@@ -39,6 +40,10 @@ const AllRoutes = () => {
           <Route path="/terms-condition" element={<Terms_Condition />} />
           <Route path="/terms-condition-app" element={<Terms_Condition_App />} />
           <Route path="/Contact" element={<Contact />} />
+      
+      {/* start changes */}
+      <Route path="/type/:category" element={<NewsByStateOrAuthor />} />
+      {/* end changes */}
         </Routes>
       </HelmetProvider>
 

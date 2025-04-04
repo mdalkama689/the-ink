@@ -10,7 +10,7 @@ import Category from "./Category";
 import SocialLinks from "./SocialLinks";
 import CopyRight from "./CopyRight";
 
-const Footer = () => {
+const Footer = ({setSearchKey}) => {
   const deviceType = useDeviceType();
   return (
     <div className="footer">
@@ -18,7 +18,7 @@ const Footer = () => {
 
       {deviceType == "big" ? (
         <div className="footer-content">
-          <Category />
+          <Category setSearchKey={setSearchKey} />
           <FooterLinks />
         </div>
       ) : (
